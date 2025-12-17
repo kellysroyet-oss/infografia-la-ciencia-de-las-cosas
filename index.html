@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>La Ciencia de las Cosas - Infografía Interactiva</title>
+    <style>
+        :root {
+            --primary-color: #2c3e50;
+            --secondary-color: #3498db;
+            --accent-color: #e74c3c;
+            --light-color: #ecf0f1;
+            --dark-color: #34495e;
+            --success-color: #2ecc71;
+            --warning-color: #f39c12;
+            --info-color: #1abc9c;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            padding: 20px;
+            min-height: 100vh;
+        }
+        
+        .infographic-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--secondary-color) 100%);
+            color: white;
+            padding: 30px 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            font-size: 2.8rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .header p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+            padding: 40px;
+        }
+        
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border-left: 4px solid var(--secondary-color);
+        }
+        
+        .section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+        
+        .section.physics-fundamentals {
+            border-left-color: var(--secondary-color);
+        }
+        
+        .section.kinematics {
+            border-left-color: var(--info-color);
+        }
+        
+        .section.dynamics {
+            border-left-color: var(--success-color);
+        }
+        
+        .section.thermodynamics {
+            border-left-color: var(--warning-color);
+        }
+        
+        .section.electromagnetism {
+            border-left-color: var(--accent-color);
+        }
+        
+        .section.logistics {
+            border-left-color: var(--primary-color);
+        }
+        
+        .section h2 {
+            font-size: 1.8rem;
+            margin-bottom: 15px;
+            color: var(--primary-color);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .section h2 i {
+            font-size: 1.5rem;
+        }
+        
+        .concepts {
+            margin: 15px 0;
+        }
+        
+        .concept {
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 8px;
+            padding: 12px 15px;
+            margin: 8px 0;
+            border-left: 3px solid var(--secondary-color);
+            transition: all 0.2s ease;
+        }
+        
+        .concept:hover {
+            background: rgba(52, 152, 219, 0.1);
+            transform: translateX(5px);
+        }
+        
+        .concept strong {
+            color: var(--secondary-color);
+            font-weight: 600;
+        }
+        
+        .application {
+            background: linear-gradient(135deg, rgba(44, 62, 80, 0.05) 0%, rgba(52, 152, 219, 0.1) 100%);
+            padding: 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+        }
+        
+        .application h3 {
+            color: var(--primary-color);
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+        
+        .visual-elements {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 20px 0;
+        }
+        
+        .element {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .formula {
+            background: var(--light-color);
+            padding: 10px;
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 1.1rem;
+            margin: 5px 0;
+            border: 2px solid var(--primary-color);
+        }
+        
+        .footer {
+            background: var(--primary-color);
+            color: white;
+            text-align: center;
+            padding: 25px 40px;
+            font-size: 1.1rem;
+        }
+        
+        .footer p {
+            margin: 5px 0;
+            opacity: 0.9;
+        }
+        
+        .badge {
+            display: inline-block;
+            background: var(--accent-color);
+            color: white;
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            margin-right: 5px;
+        }
+        
+        @media (max-width: 768px) {
+            .content-grid {
+                grid-template-columns: 1fr;
+                padding: 20px;
+            }
+            
+            .visual-elements {
+                grid-template-columns: 1fr;
+            }
+            
+            .header h1 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        .quote {
+            font-style: italic;
+            border-left: 3px solid var(--secondary-color);
+            padding: 15px 20px;
+            margin: 20px 0;
+            background: rgba(52, 152, 219, 0.05);
+            border-radius: 0 8px 8px 0;
+        }
+        
+        .interactive-element {
+            cursor: pointer;
+            transition: all 0.3s ease;
+            padding: 15px;
+            background: rgba(231, 76, 60, 0.1);
+            border-radius: 8px;
+            margin: 10px 0;
+        }
+        
+        .interactive-element:hover {
+            background: rgba(231, 76, 60, 0.2);
+            transform: scale(1.02);
+        }
+        
+        .hidden-content {
+            display: none;
+            padding: 15px;
+            background: var(--light-color);
+            border-radius: 8px;
+            margin: 10px 0;
+            animation: fadeIn 0.5s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body>
+    <div class="infographic-container">
+        <div class="header">
+            <h1>LA CIENCIA DE LAS COSAS</h1>
+            <p>Principios Físicos Fundamentales y sus Aplicaciones en la Coordinación de Procesos Logísticos</p>
+        </div>
+        
+        <div class="content-grid">
+            <div class="section physics-fundamentals">
+                <h2>🔬 Fundamentos de la Física</h2>
+                <div class="concepts">
+                    <div class="concept"><strong>Sistema Internacional de Unidades:</strong> Marco de medición estandarizado para longitud (m), masa (kg), tiempo (s), fuerza (N), energía (J)</div>
+                    <div class="concept"><strong>Magnitudes escalares:</strong> Solo tienen valor numérico (tiempo, distancia, masa, energía)</div>
+                    <div class="concept"><strong>Magnitudes vectoriales:</strong> Tienen valor, dirección y sentido (velocidad, fuerza, aceleración)</div>
+                </div>
+                <div class="application">
+                    <h3>📊 Aplicación Logística</h3>
+                    <p>El uso de unidades estandarizadas permite la comunicación efectiva en la cadena de suministro global y el cálculo preciso de parámetros operativos como costos de transporte, capacidades de almacenamiento y tiempos de entrega.</p>
+                </div>
+            </div>
+            
+            <div class="section kinematics">
+                <h2>🚗 Cinemática</h2>
+                <div class="concepts">
+                    <div class="concept"><strong>Movimiento Rectilíneo Uniforme:</strong> Velocidad constante, aceleración nula</div>
+                    <div class="concept"><strong>Movimiento Rectilíneo Uniformemente Variado:</strong> Aceleración constante</div>
+                    <div class="concept"><strong>Caída Libre:</strong> Movimiento bajo influencia exclusiva de la gravedad</div>
+                </div>
+                <div class="visual-elements">
+                    <div class="element">
+                        <div class="formula">v = d/t</div>
+                        <p>Velocidad</p>
+                    </div>
+                    <div class="element">
+                        <div class="formula">a = Δv/Δt</div>
+                        <p>Aceleración</p>
+                    </div>
+                    <div class="element">
+                        <div class="formula">d = v₀t + ½at²</div>
+                        <p>Distancia</p>
+                    </div>
+                </div>
+                <div class="application">
+                    <h3>📊 Aplicación Logística</h3>
+                    <p>Estos conceptos permiten modelar rutas de distribución, calcular tiempos de entrega y optimizar velocidades de vehículos para minimizar costos y maximizar eficiencia.</p>
+                </div>
+            </div>
+            
+            <div class="section dynamics">
+                <h2>⚖️ Dinámica</h2>
+                <div class="concepts">
+                    <div class="concept"><strong>Primera Ley de Newton (Inercia):</strong> Un cuerpo en reposo permanece en reposo y un cuerpo en movimiento permanece en movimiento uniforme a menos que una fuerza externa actúe sobre él</div>
+                    <div class="concept"><strong>Segunda Ley de Newton:</strong> F = ma (Fuerza = masa × aceleración)</div>
+                    <div class="concept"><strong>Tercera Ley de Newton:</strong> Por cada acción existe una reacción igual y opuesta</div>
+                </div>
+                <div class="quote">
+                    "En logística, cada acción en la cadena de suministro genera una reacción: mejorar velocidad de entrega puede aumentar costos o impacto ambiental"
+                </div>
+                <div class="application">
+                    <h3>📊 Aplicación Logística</h3>
+                    <p>Estas leyes explican la dinámica de los vehiculos de transporte, el manejo de cargas y el diseño de sistemas de almacenamiento, permitiendo optimizar procesos y reducir riesgos operativos.</p>
+                </div>
+            </div>
+            
+            <div class="section thermodynamics">
+                <h2>🔥 Termodinámica</h2>
+                <div class="concepts">
+                    <div class="concept"><strong>Primera Ley:</strong> Conservación de la energía (energía no se crea ni se destruye, solo se transforma)</div>
+                    <div class="concept"><strong>Segunda Ley:</strong> La entropía de un sistema aislado nunca disminuye</div>
+                    <div class="concept"><strong>Transferencia de calor:</strong> Conducción, convección y radiación</div>
+                </div>
+                <div class="interactive-element" onclick="toggleContent('thermo-content')">
+                    🔍 <strong>Haga clic para ver aplicación logística</strong>
+                </div>
+                <div class="hidden-content" id="thermo-content">
+                    <p>En PanMi S.A.S., los principios termodinámicos son cruciales para la cadena de frío y conservación de productos perecederos. La segunda ley explica por qué los productos requieren refrigeración constante para preservar calidad y minimizar mermas (actualmente 8% promedio).</p>
+                </div>
+                <div class="application">
+                    <h3>📊 Aplicación Logística</h3>
+                    <p>La comprensión de la termodinámica permite diseñar sistemas de cadena de frío eficientes, optimizar el consumo energético y reducir mermas en productos perecederos, mejorando la rentabilidad y sostenibilidad.</p>
+                </div>
+            </div>
+            
+            <div class="section electromagnetism">
+                <h2>⚡ Electromagnetismo</h2>
+                <div class="concepts">
+                    <div class="concept"><strong>Campos eléctricos y magnéticos:</strong> Interacciones entre cargas y corrientes</div>
+                    <div class="concept"><strong>Ondas electromagnéticas:</strong> Propagación de energía a través del espacio</div>
+                    <div class="concept"><strong>Inducción electromagnética:</strong> Generación de corriente mediante campos magnéticos variables</div>
+                </div>
+                <div class="visual-elements">
+                    <div class="element">
+                        <div class="formula">F = q(E + v × B)</div>
+                        <p>Fuerza Lorentz</p>
+                    </div>
+                    <div class="element">
+                        <div class="formula">c = 3 × 10⁸ m/s</div>
+                        <p>Velocidad luz</p>
+                    </div>
+                    <div class="element">
+                        <div class="formula">P = VI</div>
+                        <p>Potencia eléctrica</p>
+                    </div>
+                </div>
+                <div class="application">
+                    <h3>📊 Aplicación Logística</h3>
+                    <p>Estos principios son la base de tecnologías como GPS, RFID, sistemas de comunicación inalámbrica y sensores de monitoreo, permitiendo la trazabilidad en tiempo real y la optimización de procesos logísticos.</p>
+                </div>
+            </div>
+            
+            <div class="section logistics">
+                <h2>🚚 Aplicaciones Logísticas</h2>
+                <div class="concepts">
+                    <div class="concept"><strong>Optimización de rutas:</strong> Aplicación de cinemática y dinámica</div>
+                    <div class="concept"><strong>Gestión de inventarios perecederos:</strong> Aplicación de termodinámica</div>
+                    <div class="concept"><strong>Tecnologías de seguimiento:</strong> Aplicación de electromagnetismo</div>
+                    <div class="concept"><strong>Diseño ergonómico:</strong> Aplicación de mecánica y fuerzas</div>
+                </div>
+                <div class="quote">
+                    "La integración de principios físicos en logística permite reducir tiempos de entrega en un 15% y mermas en un 20%, mejorando significativamente la eficiencia operativa"
+                </div>
+                <div class="application">
+                    <h3>📊 Caso PanMi S.A.S.</h3>
+                    <p>La aplicación de estos principios ha permitido identificar oportunidades para reducir mermas (8% actual), optimizar tiempos de entrega (57.6 minutos promedio) y mejorar la eficiencia energética en procesos de producción y distribución.</p>
+                </div>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p><span class="badge">INFOGRAFÍA</span> La Ciencia de las Cosas - Fundamentos Físicos para la Logística</p>
+            <p>Programa de Coordinación de Procesos Logísticos - SENA</p>
+            <p>Kellys Yohana Royet Reales - Ficha 3185903</p>
+            <p>17 de Diciembre de 2025</p>
+        </div>
+    </div>
+
+    <script>
+        function toggleContent(elementId) {
+            const content = document.getElementById(elementId);
+            if (content.style.display === 'block') {
+                content.style.display = 'none';
+            } else {
+                content.style.display = 'block';
+            }
+        }
+        
+        // Animation for sections on scroll
+        document.addEventListener('DOMContentLoaded', function() {
+            const sections = document.querySelectorAll('.section');
+            
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = "1";
+                        entry.target.style.transform = "translateY(0)";
+                    }
+                });
+            }, { threshold: 0.1 });
+            
+            sections.forEach(section => {
+                section.style.opacity = "0";
+                section.style.transform = "translateY(20px)";
+                section.style.transition = "opacity 0.6s ease, transform 0.6s ease";
+                observer.observe(section);
+            });
+        });
+    </script>
+</body>
+</html>
